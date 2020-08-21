@@ -31,13 +31,13 @@ if (!empty($_POST)) {
 <?=template_header('Create Poll')?>
 
 <div class="content update">
-	<h2>Create Poll</h2>
+	<h2>Luo äänestys</h2>
     <form action="create.php" method="post">
-        <label for="title">Title</label>
+        <label for="title">Otsikko</label>
         <input type="text" name="title" id="title">
-        <label for="desc">Description</label>
+        <label for="desc">Kuvaus</label>
         <input type="text" name="desc" id="desc">
-        <label for="answers">Answers (per line)</label>
+        <label for="answers">Vastaukset</label>
         <textarea name="answers" id="answers"></textarea>
         <input type="submit" value="Create">
     </form>
