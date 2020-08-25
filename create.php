@@ -3,60 +3,6 @@ include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
 
-// // Test if fields are empty
-// $titleErr = $descErr = $answersErr "";
-// $title = $lähettäjä = $viesti = "";
-
-// // Check For Submit
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-//     if (empty($_POST["aihe"])) {
-//         $aiheErr = "Aihe on pakollinen";
-//     } else {
-//         $aihe = test_input($_POST["aihe"]);
-//     }
-
-//     if (empty($_POST["lähettäjä"])) {
-//         $lähettäjäErr = "Lähettäjä on pakollinen";
-//     } else {
-//         $lähettäjä = test_input($_POST["lähettäjä"]);
-//     }
-
-//     if (empty($_POST["viesti"])) {
-//         $viestiErr = "Viesti on pakollinen";
-//     } else {
-//         $viesti = test_input($_POST["viesti"]);
-//     }
-    
-
-
-// if (strlen($aihe) > 0 && strlen($lähettäjä) > 0 && strlen($viesti) > 0)	{
-
-//     // Get form data
-//     $aihe = mysqli_real_escape_string($conn, $aihe);
-//     $viesti = mysqli_real_escape_string($conn, $viesti);
-//     $lähettäjä = mysqli_real_escape_string($conn, $lähettäjä);
-
-//     // Hae pvm php-funktiolla
-//     date_default_timezone_set('Europe/Helsinki');
-//     $pvm = date("Y-m-d G:i:s ");
-
-//     $query = "INSERT INTO viestit (aihe, lähettäjä, viesti, pvm) VALUES('$aihe', '$lähettäjä', '$viesti', '$pvm')";
-//     if(mysqli_query($conn, $query)){
-//         header('Location: '.ROOT_URL.'');
-//     } else {
-//         echo 'ERROR: '. mysqli_error($conn);
-//     }
-
-// }
-
-
-// }
-
-
-
-
-
 // Check if POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
