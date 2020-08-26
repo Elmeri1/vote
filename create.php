@@ -3,8 +3,33 @@ include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
 
-// Check if POST data is not empty
+$titleErr = $descErr = $answersErr = "";
+$title = $desc = $answers = "";
+
 if (!empty($_POST)) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST["title"])) {
+          $titleErr = "Title is required";
+        } else {
+          $title = test_input($_POST["title"]);
+        }
+    
+        if (empty($_POST["desc"])) {
+            $descErr = "Desc is required";
+          } else {
+            $desc = test_input($_POST["desc"]);
+          }
+    
+        if (empty($_POST["answers"])) {
+        $answersErr = "Answers is required";
+        } else {
+        $answers = test_input($_POST["answers"]);
+        }
+    
+    }
+
+// Check if POST data is not empty
+
     // Post data not empty insert a new record
     // Check if POST variable "title" exists, if not default the value to blank, basically the same for all variables
     $title = isset($_POST['title']) ? $_POST['title'] : '';
@@ -26,6 +51,7 @@ if (!empty($_POST)) {
     // Output message
     $msg = 'Created Successfully!';
 }
+
 ?>
 
 <?=template_header('Create Poll')?>
@@ -36,17 +62,15 @@ if (!empty($_POST)) {
 
         <label for="title">Otsikko</label>
         <input type="text" name="title" id="title">
-        <!-- <span class="error"> <?php echo $titleErr;?></span> -->
+        <span class="error"> <?php echo $titleErr;?></span>
 
         <label for="desc">Kuvaus</label>
         <input type="text" name="desc" id="desc">
-        <label for="answers">Vastaukset</label>
-        <!-- <span class="error"> <?php echo $descErr;?></span> -->
+        <span class="error"> <?php echo $descErr;?></span>
 
         <textarea name="answers" id="answers"></textarea>
+        <span class="error"> <?php echo $answersErr;?></span>
         <input type="submit" value="Luo">
-        <!-- <span class="error"> <?php echo $answersErr;?></span> -->
-
 
     </form>
     <?php if ($msg): ?>
@@ -54,4 +78,4 @@ if (!empty($_POST)) {
     <?php endif; ?>
 </div>
 
-<?=template_footer()?>
+<?=template_footer();?>
