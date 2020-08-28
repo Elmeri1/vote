@@ -1,13 +1,32 @@
 <?php
-include 'functions.php';
-// Connect to MySQL
-$pdo = pdo_connect_mysql();
-// MySQL query that selects all the polls and poll answers
-$stmt = $pdo->query('SELECT p.*, GROUP_CONCAT(pa.title ORDER BY pa.id) AS answers FROM polls p LEFT JOIN poll_answers pa ON pa.poll_id = p.id GROUP BY p.id');
-$polls = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+session_start();
+
+require('config/config.php');
+require('config/db.php');
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+}
+
+// Create Query
+$query = 'SELECT * FROM polls ORDER BY id DESC';
+
+// Get Result
+$result = mysqli_query($conn, $query);
+
+// Fetch Data
+$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+//var_dump($posts);
+// Free Result
+mysqli_free_result($result);
+// Close Connection
+mysqli_close($conn);
+
 ?>
 
-<?=template_header('Polls')?>
+<?php include 'inc/header.php'; ?>
 
 <div class="content home">
 	<h2>Äänestykset</h2>
@@ -37,4 +56,4 @@ $polls = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
 </div>
 
-<?=template_footer()?>
+<?php include 'inc/footer.php'; ?>
