@@ -16,7 +16,7 @@ $query = 'SELECT * FROM polls ORDER BY id DESC';
 $result = mysqli_query($conn, $query);
 
 // Fetch Data
-$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$polls = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 //var_dump($posts);
 // Free Result
@@ -41,7 +41,7 @@ mysqli_close($conn);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($polls as $poll): ?>
+            <?php foreach ($polls as $poll):?>
             <tr>
                 <td><?=$poll['id']?></td>
                 <td><?=$poll['title']?></td>
