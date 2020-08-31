@@ -10,26 +10,25 @@ $title = $answers = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["title"])) {
-          $titleErr = "Title is required";
+          $titleErr = "Otsikko on pakollinen";
         } else {
           $title = test_input($_POST["title"]);
         }
-    
+
         if (empty($_POST["answers"])) {
-        $answersErr = "Answers is required";
+        $answersErr = "Vastaus on pakollinen";
         } else {
         $answers = test_input($_POST["answers"]);
         }
     }
 
 
-    if (strlen($title) > 0 && strlen($answers) > 0 {
+    if (strlen($title) > 0 && strlen($descc) > 0) {
 
 			// Get form data
 			$title = mysqli_real_escape_string($conn, $title);
-      $answers = mysqli_real_escape_string($conn, $answers);
 
-			$query = "INSERT INTO polls (title, answers) VALUES('$title', '$answers')";
+			$query = "INSERT INTO polls (title) VALUES('$title')";
 			if(mysqli_query($conn, $query)){
 				header('Location: '.ROOT_URL.'');
 			} else {
@@ -51,6 +50,7 @@ $title = $answers = "";
         <input type="text" name="title" id="title">
         <span class="error"> <?php echo $titleErr;?></span>
 
+        <label for="answers">Vastaukset</label>
         <textarea name="answers" id="answers"></textarea>
         <span class="error"> <?php echo $answersErr;?></span>
         <input type="submit" value="Luo">
