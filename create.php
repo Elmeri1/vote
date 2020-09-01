@@ -23,7 +23,7 @@ $title = $answers = "";
     }
 
 
-    if (strlen($title) > 0) {
+    if (strlen($title) > 0 && strlen($answers) > 0) {
 
 			// Get form data
 			$title = mysqli_real_escape_string($conn, $title);
