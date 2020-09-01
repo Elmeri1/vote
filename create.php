@@ -26,9 +26,10 @@ $title = $answers = "";
     if (strlen($title) > 0 && strlen($answers) > 0) {
 
 			// Get form data
-			$title = mysqli_real_escape_string($conn, $title);
+      $title = mysqli_real_escape_string($conn, $title);
+      $answers = mysqli_real_escape_string($conn, $answers);
 
-			$query = "INSERT INTO polls (title) VALUES('$title')";
+			$query = "INSERT INTO polls (title, answers) VALUES('$title', '$answers')";
 			if(mysqli_query($conn, $query)){
 				header('Location: '.ROOT_URL.'');
 			} else {
