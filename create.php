@@ -12,13 +12,13 @@ $title = $answers = "";
         if (empty($_POST["title"])) {
           $titleErr = "Otsikko on pakollinen";
         } else {
-          $title = test_input($_POST["title"]);
+          $title = ($_POST["title"]);
         }
 
         if (empty($_POST["answers"])) {
         $answersErr = "Vastaus on pakollinen";
         } else {
-        $answers = test_input($_POST["answers"]);
+        $answers = ($_POST["answers"]);
         }
     }
 
