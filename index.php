@@ -48,7 +48,7 @@ mysqli_close($conn);
 				<td><?=$poll['answers']?></td>
                 <td class="actions">
 					<a href="vote.php?id=<?=$poll['id']?>" class="view" title="View Poll"><i class="fas fa-eye fa-xs"></i></a>
-                    <a href="delete.php?id=<?=$poll['id']?>" class="trash" title="Delete Poll"><i class="fas fa-trash fa-xs"></i></a>
+                    <a href="delete.php?id=<?php echo $poll['id'];?>" class="trash" title="Delete Poll"><i class="fas fa-trash fa-xs"></i></a>
                 </td>
             </tr>
             <?php endforeach; ?>
