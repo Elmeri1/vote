@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Kirjaudu sisään">
             </div>
-            <a href="register.php">Rekisteröityminen</a>.</p>
+            <a href="register.php">Rekisteröityminen</a></p>
         </form>
     </div>    
 
