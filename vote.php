@@ -1,14 +1,15 @@
 <?php
-include 'functions.php';
-// Connect to MySQL
-$pdo = pdo_connect_mysql();
+
+require('config/config.php');
+require('config/db.php'); 
+
 // If the GET request "id" exists (poll id)...
 if (isset($_GET['id'])) {
     // MySQL query that selects the poll records by the GET request "id"
-    $stmt = $pdo->prepare('SELECT * FROM polls WHERE id = ?');
+    $query = ('SELECT * FROM polls WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     // Fetch the record
-    $poll = $stmt->fetch(PDO::FETCH_ASSOC);
+    $poll = $stmt->fetch(mysql::FETCH_ASSOC);
     // Check if the poll record exists with the id specified
     if ($poll) {
         // MySQL query that selects all the poll answers
@@ -33,11 +34,10 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<?=template_header('Poll Vote')?>
+<?php include 'inc/header.php'; ?>
 
 <div class="content poll-vote">
 	<h2><?=$poll['title']?></h2>
-	<p><?=$poll['desc']?></p>
     <form action="vote.php?id=<?=$_GET['id']?>" method="post">
         <?php for ($i = 0; $i < count($poll_answers); $i++): ?>
         <label>
@@ -52,4 +52,4 @@ if (isset($_GET['id'])) {
     </form>
 </div>
 
-<?=template_footer()?>
+<?php include 'inc/footer.php'; ?>
