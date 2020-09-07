@@ -1,5 +1,19 @@
 <?php
-include 'functions.php';
+
+session_start();
+
+require('config/config.php');
+require('config/db.php');
+
+if (isset($_GET['id'])){
+    $poll_answers = ('SELECT id, title FROM poll_answers'
+}
+
+
+
+
+
+//---------------------------raja----------------------//
 // Connect to MySQL
 $pdo = pdo_connect_mysql();
 // If the GET request "id" exists (poll id)...
@@ -34,7 +48,6 @@ if (isset($_GET['id'])) {
 
 <div class="content poll-result">
 	<h2><?=$poll['title']?></h2>
-	<p><?=$poll['desc']?></p>
     <div class="wrapper">
         <?php foreach ($poll_answers as $poll_answer): ?>
         <div class="poll-question">
