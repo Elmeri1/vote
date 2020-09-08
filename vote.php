@@ -70,8 +70,7 @@ if (isset($_POST['submit']))
 <?php include 'inc/header.php';?>
 
 <div class="content poll-vote">
-	<h2><?=$poll['id']?></h2>
-	<p><?=$poll['desc']?></p>
+	<h2><?=$poll['title']?></h2>
     <form action="vote.php?id=<?=$_GET['id']?>" method="post">
         <?php for ($i = 0; $i < count($votes); $i++): ?>
         <label>
