@@ -15,7 +15,7 @@ $polls = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 $poll = "SELECT id, title, answers FROM polls DESC";
 
-$votes = "SELECT votes FROM poll_answers";
+$poll_answers = "SELECT votes FROM poll_answers";
 
 // $query = "UPDATE 'poll_answers' SET 'votes'='votes'+1 WHERE 'id'=1 AND poll_id=1"; 
 
@@ -26,13 +26,13 @@ $votes = "SELECT votes FROM poll_answers";
 if (isset($_POST['submit'])) 
 {
 
-    $vote = "UPDATE 'poll_answers' SET 'votes'='votes'+1 WHERE 'id'=1 AND poll_id=1"; 
+    $vote = "UPDATE 'poll_answers' SET 'votes'='votes'+1 WHERE 'id'=? AND poll_id=?"; 
 
     $result = mysqli_query($conn, $query);
 
 }
 
-//----------------------------------------------------raja-------------------------------------------//
+
 // include 'functions.php';
 // // Connect to MySQL
 // $pdo = pdo_connect_mysql();
@@ -66,13 +66,13 @@ if (isset($_POST['submit']))
 //     die ('No poll ID specified.');
 // }
 // ?>
-
+-
 <?php include 'inc/header.php';?>
 
 <div class="content poll-vote">
 	<h2><?=$poll['title']?></h2>
     <form action="vote.php?id=<?=$_GET['id']?>" method="post">
-        <?php for ($i = 0; $i < count($votes); $i++): ?>
+        <?php for ($i = 0; $i < count($poll_answers); $i++): ?>
         <label>
             <input type="radio" name="poll_answer" value="<?=$poll_answers[$i]['id']?>"<?=$i == 0 ? ' checked' : ''?>>
             <?=$poll_answers[$i]['title']?>

@@ -13,7 +13,6 @@ if (isset($_GET['id'])){
 
 
 
-//---------------------------raja----------------------//
 // Connect to MySQL
 $pdo = pdo_connect_mysql();
 // If the GET request "id" exists (poll id)...
