@@ -66,7 +66,7 @@ if (isset($_POST['submit']))
 //     die ('No poll ID specified.');
 // }
 // ?>
--
+
 <?php include 'inc/header.php';?>
 
 <div class="content poll-vote">
