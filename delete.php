@@ -1,18 +1,52 @@
 <?php
-
-if (!isset($_GET['id'])) {
-    die('id:n arvoa ei ole asetettu');
+session_start();
+include 'functions.php';
+$pdo = pdo_connect_mysql();
+$msg = '';
+// Check that the poll ID exists
+if (isset($_GET['id'])) {
+    // Select the record that is going to be deleted
+    $stmt = $pdo->prepare('SELECT * FROM polls WHERE id = ?');
+    $stmt->execute([$_GET['id']]);
+    $poll = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$poll) {
+        die ('Poll doesn\'t exist with that ID!');
+    }
+    // Make sure the user confirms beore deletion
+    if (isset($_GET['confirm'])) {
+        if ($_GET['confirm'] == 'yes') {
+            // User clicked the "Yes" button, delete record
+            $stmt = $pdo->prepare('DELETE FROM polls WHERE id = ?');
+            $stmt->execute([$_GET['id']]);
+            // We also need to delete the answers for that poll
+            $stmt = $pdo->prepare('DELETE FROM poll_answers WHERE poll_id = ?');
+            $stmt->execute([$_GET['id']]);
+            // Output msg
+            header("Location: index.php");
+        } else {
+            // User clicked the "No" button, redirect them back to the home/index page
+            header('Location: index.php');
+            exit;
+        }
+    }
+} else {
+    die ('No ID specified!');
 }
-
-require('config/config.php');
-require('config/db.php');
-
-$id = intval($_GET['id']);
-
-$stmt = $conn->prepare("DELETE FROM polls WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-
-header('Location: index.php');
-
 ?>
+
+<?php include 'inc/header.php'; ?>
+
+<div class="content delete">
+	<h2>Poista äänestys #<?=$poll['id']?></h2>
+    <?php if ($msg): ?>
+    <p><?=$msg?></p>
+    <?php else: ?>
+	<p>Haluatko varmasti poistaa äänestyksen #<?=$poll['id']?>?</p>
+    <div class="yesno">
+        <a href="delete.php?id=<?=$poll['id']?>&confirm=yes">Kyllä</a>
+        <a href="delete.php?id=<?=$poll['id']?>&confirm=no">En</a>
+    </div>
+    <?php endif; ?>
+</div>
+
+<?php include 'inc/footer.php'; ?>
