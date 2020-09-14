@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `phppoll` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `phppoll`;
 -- MariaDB dump 10.17  Distrib 10.4.13-MariaDB, for Win64 (AMD64)
 --
 -- Host: 127.0.0.1    Database: phppoll
@@ -30,7 +28,7 @@ CREATE TABLE `poll_answers` (
   `title` text NOT NULL,
   `votes` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +37,7 @@ CREATE TABLE `poll_answers` (
 
 LOCK TABLES `poll_answers` WRITE;
 /*!40000 ALTER TABLE `poll_answers` DISABLE KEYS */;
-INSERT INTO `poll_answers` VALUES (10,10,'kyllä',1),(11,10,'ei',1),(12,10,'ehkä',1);
+INSERT INTO `poll_answers` VALUES (11,0,'on',0),(12,0,'on',0),(13,0,'ei',0);
 /*!40000 ALTER TABLE `poll_answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,9 +51,8 @@ DROP TABLE IF EXISTS `polls`;
 CREATE TABLE `polls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
-  `answers` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +61,6 @@ CREATE TABLE `polls` (
 
 LOCK TABLES `polls` WRITE;
 /*!40000 ALTER TABLE `polls` DISABLE KEYS */;
-INSERT INTO `polls` VALUES (38,'vote','kyllÃ¤\r\nei'),(39,'vote2','kyllÃ¤\r\nei');
 /*!40000 ALTER TABLE `polls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,13 +73,11 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
   `admin` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +86,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jootu','$2y$10$q1jHNUYcXKUHWxlm2N3bAOOKjqAcxLWXOeOYc2ke23ime83iQ3Wpi','2020-08-31 08:47:12',1),(2,'Adolf','$2y$10$BUYlaf0x1ISVkp.JBL/vMOOECV6.fe2IB/.1Eb0uXey7osv6BLOPW','2020-08-31 08:49:45',0),(3,'paska','$2y$10$ZkJJcyi7qAhaPUbqhbiahenOGAUy0S8BhBPtnLcyz9BGu2Kudk11u','2020-09-08 09:06:27',0),(4,'pulla','$2y$10$HqHZi4BxUhkCSF58FV7cSOEVzmAmqOrxf3X6BnOsanV611nptqODy','2020-09-08 10:02:49',0);
+INSERT INTO `users` VALUES (1,'niilo','$2y$10$lItO/C0WloTOTZpw1xhwcO5K8VW3fhQY/5Hkz7.CcTVzdi7PiaGf.',1),(2,'onni','$2y$10$Y6oYDzyHvwlryUaSdUHB3O98VaKHbWv5FaKPhvO/ZHFi/rL9UVl/e',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -105,4 +99,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-08 12:48:15
+-- Dump completed on 2020-09-14 11:21:52
